@@ -1,0 +1,53 @@
+<p-toast></p-toast>
+<app-spinner [isLoading]="isLoading"></app-spinner>
+<ng-template #formDataModalContainerRef></ng-template>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div> 
+    <p-table #tt [value]="data" [columns]="columns">
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.sortBy">
+                    {{ col.header }}
+                    <span *ngIf="col.sortBy">
+                        <p-sortIcon [field]="col.sortBy"></p-sortIcon>
+                    </span>
+                </th>
+                <th style="text-align: left">                
+                    <button pButton class="ui-button-success" icon="fa fa-edit" pTooltip="Create"
+                    tooltipPosition="top" (click)="newData()"></button>
+                </th>
+            </tr>
+            <tr>
+                <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                    <input *ngSwitchCase="'name'" pInputText type="text" (input)="tt.filter($event.target.value, col.filterBy, col.filterMatchMode)">
+                    <p-multiSelect *ngSwitchCase="'category'" [options]="categoriesOptions" defaultLabel="All Values" (onChange)="tt.filter($event.value, col.filterBy, 'in')" [showHeader]='false'></p-multiSelect>
+                    <p-multiSelect *ngSwitchCase="'producer'" [options]="producersOptions" defaultLabel="All Values" (onChange)="tt.filter($event.value, col.filterBy, 'in')" [showHeader]='false'></p-multiSelect>
+                    <p-multiSelect *ngSwitchCase="'device Type'" [options]="deviceTypesOptions" defaultLabel="All Values" (onChange)="tt.filter($event.value, col.filterBy, 'in')" [showHeader]='false'></p-multiSelect>
+                    <span *ngSwitchDeafult></span>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data>
+            <tr>
+                <td *ngFor="let col of columns" [ngSwitch]="col.field">
+                    <div *ngSwitchCase="'logo'">
+                        <span *ngIf="data.logo">
+                            <img class="logo" src="{{data.logo.file.data}}"/>
+                        </span>
+                    </div>
+                    <div *ngSwitchCase="'category'">
+                        {{data.category.name}}
+                    </div>
+                    <div *ngSwitchDefault>{{data[col.field]}}</div>
+                </td>
+                <td>
+                    <button pButton class="ui-button-warning" icon="fa fa-edit" pTooltip="Edit"
+                        tooltipPosition="top" (click)="editData(data.id)"></button>
+                    <button pButton class="ui-button-danger" icon="fa fa-trash" pTooltip="Delete"
+                        tooltipPosition="top" (click)="deleteData(data.id, data.name)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

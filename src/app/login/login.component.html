@@ -1,0 +1,29 @@
+<div class="login-container">
+  <div class="ui-g-12 ui-md-8 ui-md-offset-2 ui-lg-4 ui-lg-offset-4">
+    <p-card styleClass="ui-card-shadow" title="PMO">
+      <p-header>
+      </p-header>
+      <form class="ui-g ui-fluid" id="signInForm">
+        <div class="ui-g-12">
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                <input type="text" pInputText placeholder="Email">         
+            </div>
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                <input type="password" pInputText placeholder="Password">         
+            </div>
+            <p-checkbox name="groupname" value="val1" label="Remember me" [(ngModel)]="selectedValue"></p-checkbox>
+          <button pButton icon="fa fa-sign-in" iconPos="right" label="Login" (click)="onLogin()" type="submit"
+            [disabled]="isLoading">
+          </button>
+          <div align="center">
+            <i *ngIf="isLoading" class="fa fa-circle-o-notch fa-spin"></i>
+          </div>
+        </div>
+      </form>
+      <p-footer>
+      </p-footer>
+    </p-card>
+  </div>
+</div>

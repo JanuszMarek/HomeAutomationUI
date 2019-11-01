@@ -1,0 +1,116 @@
+<p-toast></p-toast>
+<p-dialog header="{{dialogHeader}}" [(visible)]="modalVisible" [modal]="true" [responsive]="false"
+  [closeOnEscape]="true" [focusOnShow]="true" [resizable]="false" [maximizable]="false" [blockScroll]="true" 
+  [style]="{'width':'450px'}" [contentStyle]="{'overflow':'auto'}">
+  <form class="ui-g ui-fluid" (ngSubmit)="dataToEdit ? editExisted() : createNew()" [formGroup]="dataForm">
+    
+    <!-- LOGO -->
+    <div class="ui-g-12">
+      <div>
+        <span class="label">Logo</span>
+      </div>
+      <div *ngIf="!logoEditMode">
+        <img src="{{getLogoSrc()}}" class="logo" />
+      </div>
+      <div *ngIf="logoEditMode">
+        <p-fileUpload #fileUploader name="logo[]" accept="image/*" customUpload="true" (uploadHandler)="customUploader()" [showUploadButton]="false" [showCancelButton]="false" [auto]="true"></p-fileUpload>
+      </div>
+      <div class="logo ui-g-2">
+        <button type="button" pButton label="{{logoBtnLabel}}" (click)="switchLogoForm()"></button>
+      </div>
+    </div>
+    
+    <!-- INPUTS -->
+    <div class="ui-g-12">
+      <span class="ui-float-label">
+        <input pInputText formControlName="name"/>
+        <label for="name">Name</label>
+      </span>
+    </div>
+    <div class="ui-g-12">
+      <span class="ui-float-label">
+        <input pInputText formControlName="description" />
+        <label for="description">Description</label>
+      </span>
+    </div>
+
+    <!-- DROPDOWNS -->
+    <div class="ui-g-12" *ngIf="dataForm.controls.productCategoryId">
+      <span class="ui-float-label">
+          <p-dropdown [options]="dropDownCategories" formControlName="productCategoryId" filter="true" appendTo="body" placeholder="Choose category">
+              <ng-template let-selectedItem pTemplate="selectedItem">
+                  <img src="{{selectedItem.icon}}" style="width:16px;vertical-align:middle" />
+                  <span style="vertical-align:middle; margin-left: .5em">{{selectedItem.label}}</span>
+              </ng-template>
+              <ng-template let-item pTemplate="item">
+                  <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                      <img src="{{item.icon}}" style="width:24px;position:absolute;top:1px;left:5px"/>
+                      <div style="font-size:14px;float:right;margin-top:4px">{{item.label}}</div>
+                  </div>
+              </ng-template>
+          </p-dropdown>
+      </span>
+    </div>
+    <div class="ui-g-12" *ngIf="dataForm.controls.producerId">
+      <span class="ui-float-label">
+          <p-dropdown [options]="dropDownProducers" formControlName="producerId" appendTo="body" placeholder="Choose producer">
+              <ng-template let-selectedItem pTemplate="selectedItem">
+                  <img src="{{selectedItem.icon}}" style="width:16px;vertical-align:middle" />
+                  <span style="vertical-align:middle; margin-left: .5em">{{selectedItem.label}}</span>
+              </ng-template>
+              <ng-template let-item pTemplate="item">
+                  <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                      <img src="{{item.icon}}" style="width:24px;position:absolute;top:1px;left:5px"/>
+                      <div style="font-size:14px;float:right;margin-top:4px">{{item.label}}</div>
+                  </div>
+              </ng-template>
+          </p-dropdown>
+      </span>
+    </div>
+    <div class="ui-g-12" *ngIf="dataForm.controls.deviceTypeId">
+      <span class="ui-float-label">
+          <p-dropdown [options]="dropDownDeviceTypes" formControlName="deviceTypeId" filter="true" appendTo="body" placeholder="Choose device type">
+              <ng-template let-selectedItem pTemplate="selectedItem">
+                  <img src="{{selectedItem.icon}}" style="width:16px;vertical-align:middle" />
+                  <span style="vertical-align:middle; margin-left: .5em">{{selectedItem.label}}</span>
+              </ng-template>
+              <ng-template let-item pTemplate="item">
+                  <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                      <img src="{{item.icon}}" style="width:24px;position:absolute;top:1px;left:5px"/>
+                      <div style="font-size:14px;float:right;margin-top:4px">{{item.label}}</div>
+                  </div>
+              </ng-template>
+          </p-dropdown>
+      </span>
+    </div>
+
+    <!-- NUMBERS -->
+    <div class="ui-g-12" *ngIf="dataForm.controls.orderVariant">
+      <span class="ui-float-label">
+        <input type="number" min="1" pInputText pKeyFilter="int" formControlName="orderVariant" />
+        <label for="orderVariant">Order Variant</label>
+      </span>
+    </div>
+    <div class="ui-g-12" *ngIf="dataForm.controls.price">
+      <span class="ui-float-label">
+        <input type="number" min="1" pInputText pKeyFilter="pnum" formControlName="price" />
+        <label for="price">Price</label>
+      </span>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="ui-g-12">
+      <div class="ui-g-6">
+        <button type="submit" pButton icon="fa fa-check" label="Save"
+          class="right-aligned" [disabled]="!dataForm.valid || isLoading || isSubmitBtnDisable"></button>
+      </div>
+      <div class="ui-g-6">
+        <button type="button" pButton icon="fa fa-ban" label="Cancel"
+          class="right-aligned" (click)="closeModal(false)"></button>
+      </div>
+      <div align="center">
+        <div *ngIf="isLoading" class="fa fa-circle-o-notch fa-spin"></div>
+      </div>
+    </div>
+  </form>
+</p-dialog>

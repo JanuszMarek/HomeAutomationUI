@@ -1,0 +1,7 @@
+{
+    "/Api/*": {
+      "target": "",
+      "secure": false,
+      "changeOrigin": true
+    }
+}
