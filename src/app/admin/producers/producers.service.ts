@@ -7,11 +7,12 @@ import { Producer } from 'src/app/shared/model/producer';
 @Injectable({
   providedIn: 'root'
 })
-export class ProducersService extends ApiBaseService{
 
-  private urlName: string = 'Producers';
+export class ProducersService extends ApiBaseService {
 
-  constructor(httpClient: HttpClient) { 
+  private urlName = 'Producer';
+
+  constructor(httpClient: HttpClient) {
     super(httpClient);
   }
 

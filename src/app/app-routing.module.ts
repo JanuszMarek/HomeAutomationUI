@@ -14,11 +14,11 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent,
       children: [
         { path: '', redirectTo: 'producers', pathMatch: 'full'},
-        { path: 'producers', loadChildren: '../app/admin/producers/producers.module#ProducersModule'}, 
-        { path: 'categories', loadChildren: '../app/admin/categories/categories.module#CategoriesModule'}, 
-        { path: 'devicetypes', loadChildren: '../app/admin/deviceTypes/deviceTypes.module#DeviceTypesModule'}, 
-        { path: 'devices', loadChildren: '../app/admin/devices/devices.module#DevicesModule'}, 
-        { path: 'orders', component: OrdersComponent}, 
+        { path: 'producers', loadChildren: '../app/admin/producers/producers.module#ProducersModule'},
+        { path: 'categories', loadChildren: '../app/admin/categories/categories.module#CategoriesModule'},
+        { path: 'devicetypes', loadChildren: '../app/admin/deviceTypes/deviceTypes.module#DeviceTypesModule'},
+        { path: 'devices', loadChildren: '../app/admin/devices/devices.module#DevicesModule'},
+        { path: 'orders', component: OrdersComponent},
         { path: 'users', component: UsersComponent}
       ]},
   { path: 'login', component: LoginComponent },

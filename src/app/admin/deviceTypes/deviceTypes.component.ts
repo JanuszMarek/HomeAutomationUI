@@ -35,10 +35,11 @@ export class DeviceTypesComponent extends BaseListComponent implements OnInit {
   ngOnInit() {
     super.ngOnInit();
 
-    //get categories for multiselect
+    // get categories for multiselect
     this.categoriesService.getAllData().subscribe(received => {
       received.forEach(r => {
-        this.categoriesOptions.push({label: r.name, value: r.id, icon: r.logo ? r.logo.file.data : null})
+        // this.categoriesOptions.push({label: r.name, value: r.id, icon: r.logo ? r.logo.file.data : null})
+        this.categoriesOptions.push({label: r.name, value: r.id, icon: null})
       });
     });
 

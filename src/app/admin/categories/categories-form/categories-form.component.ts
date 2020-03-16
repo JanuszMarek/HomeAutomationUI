@@ -39,7 +39,7 @@ export class CategoriesFormComponent extends BaseFormComponent implements OnInit
 
   prepareDataToSend() {
     let data: Category = Object.assign({}, this.dataForm.value);
-    data.logo = this.uploadedLogo;
+    // data.logo = this.uploadedLogo;
     data.id = this.dataToEdit ? this.dataToEdit.id: null;
 
     return data;

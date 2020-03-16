@@ -17,7 +17,8 @@ export abstract class ApiBaseService {
   }
 
   protected apiAdmin(): string {
-    return 'Api/Admin/';
+    // return 'Api/Admin/';
+    return 'Api/';
   }
 
   protected get<TResult>(endpoint: string): Observable<TResult> {
@@ -41,18 +42,18 @@ export abstract class ApiBaseService {
   }
 
   private createRequest<TResult>(method: string, endpoint: string, data: any): Observable<TResult> {
-    let options = {
+    const options = {
       body: JSON.stringify(data),
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     };
 
-    return <Observable<TResult>>this.httpClient.request(method, endpoint, options);
+    return this.httpClient.request(method, endpoint, options) as Observable<TResult>;
   }
 
-  //to override
-  getAllData(): Observable<Array<BaseModel>> { return; };
-  getData(id: number): Observable<BaseModel> { return; };
-  createData(data: any): Observable<BaseModel> { return; };
-  editData(data: any): Observable<BaseModel> { return; };
-  deleteData(id: number): Observable<BaseModel> { return; };
+  // to override
+  getAllData(): Observable<Array<BaseModel>> { return; }
+  getData(id: number): Observable<BaseModel> { return; }
+  createData(data: any): Observable<BaseModel> { return; }
+  editData(data: any): Observable<BaseModel> { return; }
+  deleteData(id: number): Observable<BaseModel> { return; }
 }

@@ -65,9 +65,9 @@ export class BaseFormComponent extends BaseComponent implements OnInit {
   }
 
   protected getLogoSrc(): string {
-    if (this.dataToEdit != null && this.dataToEdit.logo != null && this.dataToEdit.logo.file != null)
-      return this.dataToEdit.logo.file.data;
-    else
+    // if (this.dataToEdit != null && this.dataToEdit.logo != null && this.dataToEdit.logo.file != null)
+    //   return this.dataToEdit.logo.file.data;
+    // else
       return null;
   }
 

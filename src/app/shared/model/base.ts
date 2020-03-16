@@ -4,5 +4,5 @@ export interface BaseModel {
     id: number;
     name: string;
     description: string;
-    logo: Logo;
+    // logo: Logo;
 }

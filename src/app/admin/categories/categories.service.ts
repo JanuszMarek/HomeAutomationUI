@@ -7,11 +7,12 @@ import { Category } from 'src/app/shared/model/Category';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriesService extends ApiBaseService{
 
-  private urlName: string = 'Categories';
+export class CategoriesService extends ApiBaseService {
 
-  constructor(httpClient: HttpClient) { 
+  private urlName = 'Category';
+
+  constructor(httpClient: HttpClient) {
     super(httpClient);
   }
 

@@ -35,9 +35,9 @@
     </div>
 
     <!-- DROPDOWNS -->
-    <div class="ui-g-12" *ngIf="dataForm.controls.productCategoryId">
+    <div class="ui-g-12" *ngIf="dataForm.controls.categoryId">
       <span class="ui-float-label">
-          <p-dropdown [options]="dropDownCategories" formControlName="productCategoryId" filter="true" appendTo="body" placeholder="Choose category">
+          <p-dropdown [options]="dropDownCategories" formControlName="categoryId" filter="true" appendTo="body" placeholder="Choose category">
               <ng-template let-selectedItem pTemplate="selectedItem">
                   <img src="{{selectedItem.icon}}" style="width:16px;vertical-align:middle" />
                   <span style="vertical-align:middle; margin-left: .5em">{{selectedItem.label}}</span>

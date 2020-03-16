@@ -41,14 +41,16 @@ export class DevicesComponent extends BaseListComponent implements OnInit {
     //get producers for multiselect
     this.producersService.getAllData().subscribe(received => {
       received.forEach(r => {
-        this.producersOptions.push({label: r.name, value: r.id, icon: r.logo ? r.logo.file.data : null})
+        // this.producersOptions.push({label: r.name, value: r.id, icon: r.logo ? r.logo.file.data : null})
+        this.producersOptions.push({label: r.name, value: r.id, icon: null})
       });
     });
 
     //get deviceTypes for multiselect
     this.deviceTypesService.getAllData().subscribe(received => {
       received.forEach(r => {
-        this.deviceTypesOptions.push({label: r.name, value: r.id, icon: r.logo ? r.logo.file.data : null})
+        // this.deviceTypesOptions.push({label: r.name, value: r.id, icon: r.logo ? r.logo.file.data : null})
+        this.deviceTypesOptions.push({label: r.name, value: r.id, icon: null})
       });
     });
     

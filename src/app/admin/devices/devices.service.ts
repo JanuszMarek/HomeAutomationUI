@@ -7,11 +7,11 @@ import { Device } from 'src/app/shared/model/device';
 @Injectable({
   providedIn: 'root'
 })
-export class DevicesService extends ApiBaseService{
+export class DevicesService extends ApiBaseService {
 
-  private urlName: string = 'Devices';
+  private urlName = 'Device';
 
-  constructor(httpClient: HttpClient) { 
+  constructor(httpClient: HttpClient) {
     super(httpClient);
   }
 

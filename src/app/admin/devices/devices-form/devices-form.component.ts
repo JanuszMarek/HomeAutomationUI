@@ -51,7 +51,7 @@ export class DevicesFormComponent extends BaseFormComponent implements OnInit {
 
   prepareDataToSend() {
     let data: Device = Object.assign({}, this.dataForm.value);
-    data.logo = this.uploadedLogo;
+    // data.logo = this.uploadedLogo;
     data.id = this.dataToEdit ? this.dataToEdit.id: null;
 
     return data;

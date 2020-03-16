@@ -39,14 +39,14 @@ export class DeviceTypesFormComponent extends BaseFormComponent implements OnIni
     return this.formBuilder.group({
       name: [data != null ? this.dataToEdit.name : '', [Validators.required, Validators.maxLength(32)]],
       description: [data != null ? this.dataToEdit.description : '', [Validators.required, Validators.maxLength(64)]],
-      productCategoryId: [data != null ? this.dataToEdit.category.id : null, [Validators.required]],
+      categoryId: [data != null ? this.dataToEdit.category.id : null, [Validators.required]],
       logo: null
     });
   }
 
   prepareDataToSend() {
     let data: DeviceType = Object.assign({}, this.dataForm.value);
-    data.logo = this.uploadedLogo;
+    // data.logo = this.uploadedLogo;
     data.id = this.dataToEdit ? this.dataToEdit.id: null;
 
     // TO DO:
