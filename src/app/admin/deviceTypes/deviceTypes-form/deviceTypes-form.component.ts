@@ -38,7 +38,7 @@ export class DeviceTypesFormComponent extends BaseFormComponent implements OnIni
   buildForm<DeviceType>(data: DeviceType): FormGroup {
     return this.formBuilder.group({
       name: [data != null ? this.dataToEdit.name : '', [Validators.required, Validators.maxLength(32)]],
-      description: [data != null ? this.dataToEdit.description : '', [Validators.required, Validators.maxLength(64)]],
+      description: [data != null ? this.dataToEdit.description : '', [Validators.maxLength(64)]],
       categoryId: [data != null ? this.dataToEdit.category.id : null, [Validators.required]],
       logo: null
     });
