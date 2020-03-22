@@ -31,8 +31,8 @@ export class CategoriesFormComponent extends BaseFormComponent implements OnInit
 
   buildForm<Category>(data: Category): FormGroup {
     return this.formBuilder.group({
-      name: [data != null ? this.dataToEdit.name : '', [Validators.required, Validators.maxLength(32)]],
-      description: [data != null ? this.dataToEdit.description : '', [Validators.required, Validators.maxLength(64)]],
+      name: [data ? this.dataToEdit.name : '', [Validators.required, Validators.maxLength(32)]],
+      description: [data ? this.dataToEdit.description : '', [Validators.required, Validators.maxLength(64)]],
       logo: null
     });
   }

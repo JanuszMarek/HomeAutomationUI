@@ -49,7 +49,7 @@ export class BaseFormComponent extends BaseComponent implements OnInit {
     this.switchLogoForm();
   }
 
-    //override every time
+  //override every time
   protected buildForm<T>(data: T): FormGroup{
     return this.formBuilder.group({});
   }

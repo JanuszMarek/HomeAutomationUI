@@ -31,8 +31,8 @@ export class ProducersFormComponent extends BaseFormComponent implements OnInit 
 
   buildForm<Producer>(data: Producer): FormGroup {
     return this.formBuilder.group({
-      name: [data != null ? this.dataToEdit.name : '', [Validators.required, Validators.maxLength(32)]],
-      description: [data != null ? this.dataToEdit.description : '', [Validators.maxLength(64)]],
+      name: [data ? this.dataToEdit.name : '', [Validators.required, Validators.maxLength(32)]],
+      description: [data ? this.dataToEdit.description : '', [Validators.maxLength(64)]],
       logo: null
     });
   }
@@ -40,7 +40,7 @@ export class ProducersFormComponent extends BaseFormComponent implements OnInit 
   prepareDataToSend() {
     let data: Producer = Object.assign({}, this.dataForm.value);
     // data.logo = this.uploadedLogo;
-    // data.id = this.dataToEdit ? this.dataToEdit.id: null;
+    data.id = this.dataToEdit ? this.dataToEdit.id: null;
 
     return data;
   }

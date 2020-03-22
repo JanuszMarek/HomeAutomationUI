@@ -1,8 +1,12 @@
 import { Logo } from './logo';
 
 export interface BaseModel {
-    id: number;
-    name: string;
-    description: string;
+    id?: number;
+    name?: string;
+    description?: string;
     // logo: Logo;
+
+    rowVersion?: string;
+    createDate?: Date;
+    updateDate?: Date;
 }

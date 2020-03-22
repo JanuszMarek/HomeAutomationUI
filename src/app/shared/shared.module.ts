@@ -19,6 +19,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 import { HttpClientModule } from '@angular/common/http';
 import { BaseComponent } from './base/base.component';
@@ -35,6 +36,7 @@ const primnegModules = [
   TooltipModule,
   DialogModule,
   InputTextModule,
+  InputTextareaModule,
   FileUploadModule,
   ConfirmDialogModule,
   CardModule,

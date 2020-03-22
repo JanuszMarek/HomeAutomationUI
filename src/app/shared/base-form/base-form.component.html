@@ -27,9 +27,13 @@
         <label for="name">Name</label>
       </span>
     </div>
+
+    <!-- TEXTARREA -->
     <div class="ui-g-12">
       <span class="ui-float-label">
-        <input pInputText formControlName="description" />
+        <textarea pInputTextarea
+         formControlName="description"
+         [autoResize] = "true"></textarea>
         <label for="description">Description</label>
       </span>
     </div>
@@ -85,18 +89,6 @@
     </div>
 
     <!-- NUMBERS -->
-    <div class="ui-g-12" *ngIf="dataForm.controls.orderVariant">
-      <span class="ui-float-label">
-        <input type="number" min="1" pInputText pKeyFilter="int" formControlName="orderVariant" />
-        <label for="orderVariant">Order Variant</label>
-      </span>
-    </div>
-    <div class="ui-g-12" *ngIf="dataForm.controls.price">
-      <span class="ui-float-label">
-        <input type="number" min="1" pInputText pKeyFilter="pnum" formControlName="price" />
-        <label for="price">Price</label>
-      </span>
-    </div>
 
     <!-- BUTTONS -->
     <div class="ui-g-12">

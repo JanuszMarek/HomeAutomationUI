@@ -38,13 +38,11 @@ export class DevicesFormComponent extends BaseFormComponent implements OnInit {
 
   buildForm<Device>(data: Device): FormGroup {
     return this.formBuilder.group({
-      name: [data != null ? this.dataToEdit.name : '', [Validators.required, Validators.maxLength(32)]],
-      description: [data != null ? this.dataToEdit.description : '', [Validators.required, Validators.maxLength(64)]],
+      name: [data ? this.dataToEdit.name : '', [Validators.required, Validators.maxLength(32)]],
+      description: [data ? this.dataToEdit.description : '', [Validators.required, Validators.maxLength(64)]],
       logo: null,
-      producerId: [data != null ? this.dataToEdit.producer.name : null, [Validators.required]],
-      deviceTypeId: [data != null ? this.dataToEdit.deviceType.name : null, [Validators.required]],
-      orderVariant: [data != null ? this.dataToEdit.orderVariant : null, [Validators.required, Validators.min(1)]],
-      price: [data != null ? this.dataToEdit.price : null, [Validators.required, Validators.min(1)]],
+      producerId: [data ? this.dataToEdit.producer.name : null, [Validators.required]],
+      deviceTypeId: [data ? this.dataToEdit.deviceType.name : null, [Validators.required]],
       images: null
     });
   }
