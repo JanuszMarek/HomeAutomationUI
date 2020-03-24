@@ -43,7 +43,8 @@ export class DeviceTypesFormComponent extends BaseFormComponent implements OnIni
       name: [data != null ? this.dataToEdit.name : '', [Validators.required, Validators.maxLength(32)]],
       description: [data != null ? this.dataToEdit.description : '', [Validators.maxLength(64)]],
       categoryId: [data != null ? this.dataToEdit.categoryId : null, [Validators.required]],
-      logo: null
+      logo: null,
+      rowVersion: [data ? this.dataToEdit.rowVersion : null]
     });
   }
 

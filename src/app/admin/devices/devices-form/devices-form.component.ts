@@ -52,7 +52,8 @@ export class DevicesFormComponent extends BaseFormComponent implements OnInit {
       logo: null,
       producerId: [data ? this.dataToEdit.producerId : null, [Validators.required]],
       deviceTypeId: [data ? this.dataToEdit.deviceTypeId : null, [Validators.required]],
-      images: null
+      images: null,
+      rowVersion: [data ? this.dataToEdit.rowVersion : null]
     });
   }
 
