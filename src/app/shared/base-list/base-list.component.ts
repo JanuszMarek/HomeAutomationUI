@@ -34,6 +34,19 @@ export class BaseListComponent extends BaseComponent implements OnInit {
   protected columns : Column[] = [];
   public isLoading = false;
 
+  get tableWidthClass() {
+    if (this.columns.length < 3) {
+      return 'ui-lg-7';
+    }
+    if (this.columns.length === 3) {
+      return 'ui-lg-9';
+    }
+    if (this.columns.length === 4) {
+      return 'ui-lg-11';
+    }
+    return 'ui-lg-12';
+  }
+
   ngOnInit() {
     this.data = this.route.snapshot.data[this.resolverName];
   }

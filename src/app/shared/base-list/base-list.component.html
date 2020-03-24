@@ -2,7 +2,7 @@
 <app-spinner [isLoading]="isLoading"></app-spinner>
 <ng-template #formDataModalContainerRef></ng-template>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-<div> 
+<div class="center ui-md-12" [ngClass]="tableWidthClass"> 
     <p-table #tt [value]="data" [columns]="columns">
         <ng-template pTemplate="header">
             <tr>
