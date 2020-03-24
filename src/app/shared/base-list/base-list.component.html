@@ -39,6 +39,12 @@
                     <div *ngSwitchCase="'category'">
                         {{data.category.name}}
                     </div>
+                    <div *ngSwitchCase="'producer'">
+                        {{data.producer.name}}
+                    </div>
+                    <div *ngSwitchCase="'deviceType'">
+                        {{data.deviceType.name}}
+                    </div>
                     <div *ngSwitchDefault>{{data[col.field]}}</div>
                 </td>
                 <td>

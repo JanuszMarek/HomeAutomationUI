@@ -23,8 +23,10 @@ export class BaseFormComponent extends BaseComponent implements OnInit {
   modelName: string;
   submitBtnDisable: boolean = false; 
 
+  dropDownCategories: SelectItem[] = [];
+  dropDownProducers: SelectItem[] = [];
+
   dataToEdit: BaseModel;
-  @Input() additionalData: SelectItem[][];
   @Input() set modalVisible(value: boolean) {
     this.isModalVisible = value;
     this.modalVisibleChanged.emit(value);

@@ -26,6 +26,7 @@ import { BaseComponent } from './base/base.component';
 import { BaseListComponent } from './base-list/base-list.component';
 import { BaseFormComponent } from './base-form/base-form.component';
 import { SpinnerModule } from '../spinner/spinner.module';
+import { LookupModule } from '../lookup/lookup.module';
 
 const primnegModules = [
   ButtonModule,
@@ -59,7 +60,8 @@ const commonModules = [
   imports: [
     ...commonModules,
     ...primnegModules,
-    SpinnerModule
+    SpinnerModule,
+    LookupModule
   ],
   providers: [MessageService, ConfirmationService],
   exports: [

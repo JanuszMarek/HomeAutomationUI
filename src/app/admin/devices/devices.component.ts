@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BaseListComponent } from 'src/app/shared/base-list/base-list.component';
 import { ProducersService } from '../producers/producers.service';
 import { DeviceTypesService } from '../deviceTypes/deviceTypes.service';
+import { LookupService } from 'src/app/lookup/lookup.service';
 
 @Component({
   selector: 'app-Devices',
@@ -15,8 +16,6 @@ import { DeviceTypesService } from '../deviceTypes/deviceTypes.service';
 export class DevicesComponent extends BaseListComponent implements OnInit {
   resolverName = 'devices';
   formComponent = DevicesFormComponent;
-  producersOptions: SelectItem[] = [];
-  deviceTypesOptions: SelectItem[] = [];
 
   constructor( 
     protected apiService: DevicesService,
@@ -24,8 +23,7 @@ export class DevicesComponent extends BaseListComponent implements OnInit {
     protected componentFactoryResolver: ComponentFactoryResolver,
     protected confirmationService: ConfirmationService,
     protected messageService: MessageService,
-    private producersService: ProducersService,
-    private deviceTypesService: DeviceTypesService
+    private lookupService: LookupService
   ) {
     super(
       apiService,
@@ -39,31 +37,18 @@ export class DevicesComponent extends BaseListComponent implements OnInit {
     super.ngOnInit();
 
     //get producers for multiselect
-    this.producersService.getAllData().subscribe(received => {
-      received.forEach(r => {
-        // this.producersOptions.push({label: r.name, value: r.id, icon: r.logo ? r.logo.file.data : null})
-        this.producersOptions.push({label: r.name, value: r.id, icon: null})
-      });
+    this.lookupService.getProducersLookup().subscribe(result => {
+      this.producersOptions = result
     });
 
     //get deviceTypes for multiselect
-    this.deviceTypesService.getAllData().subscribe(received => {
-      received.forEach(r => {
-        // this.deviceTypesOptions.push({label: r.name, value: r.id, icon: r.logo ? r.logo.file.data : null})
-        this.deviceTypesOptions.push({label: r.name, value: r.id, icon: null})
-      });
+    this.lookupService.getDeviceTypesLookup().subscribe(result => {
+      this.deviceTypesOptions = result
     });
     
     this.createColumn('logo','', null);
     this.createColumn('name','');
     this.createColumn('producer','', 'producer.id');
-    this.createColumn('device Type','', 'deviceType.id');
-  }
-
-  assignAdditionalData() {
-    let addData: SelectItem[][] = [];
-    addData[0] = Object.assign(this.producersOptions);
-    addData[1] = Object.assign(this.deviceTypesOptions);
-    return addData;
+    this.createColumn('deviceType','', 'deviceType.id');
   }
 }

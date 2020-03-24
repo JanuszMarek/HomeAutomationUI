@@ -5,6 +5,7 @@ import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
 import { ActivatedRoute } from '@angular/router';
 import { BaseListComponent } from 'src/app/shared/base-list/base-list.component';
 import { CategoriesService } from '../categories/categories.service';
+import { LookupService } from 'src/app/lookup/lookup.service';
 
 @Component({
   selector: 'app-deviceTypes',
@@ -14,15 +15,14 @@ import { CategoriesService } from '../categories/categories.service';
 export class DeviceTypesComponent extends BaseListComponent implements OnInit {
   resolverName = 'deviceTypes';
   formComponent = DeviceTypesFormComponent;
-  categoriesOptions: SelectItem[] = [];
 
   constructor( 
     protected apiService: DeviceTypesService,
     protected route: ActivatedRoute,
     protected componentFactoryResolver: ComponentFactoryResolver,
     protected confirmationService: ConfirmationService,
-    protected messageService: MessageService,
-    private categoriesService: CategoriesService
+    protected lookupService: LookupService,
+    protected messageService: MessageService
   ) {
     super(
       apiService,
@@ -35,22 +35,12 @@ export class DeviceTypesComponent extends BaseListComponent implements OnInit {
   ngOnInit() {
     super.ngOnInit();
 
-    // get categories for multiselect
-    this.categoriesService.getAllData().subscribe(received => {
-      received.forEach(r => {
-        // this.categoriesOptions.push({label: r.name, value: r.id, icon: r.logo ? r.logo.file.data : null})
-        this.categoriesOptions.push({label: r.name, value: r.id, icon: null})
-      });
+    this.lookupService.getCategoriesLookup().subscribe(result => {
+      this.categoriesOptions = result
     });
 
     this.createColumn('logo','', null);
     this.createColumn('name','');
     this.createColumn('category','', 'category.id');
-  }
-
-  assignAdditionalData() {
-    let addData: SelectItem[][] = [];
-    addData[0] = Object.assign(this.categoriesOptions);
-    return addData;
   }
 }

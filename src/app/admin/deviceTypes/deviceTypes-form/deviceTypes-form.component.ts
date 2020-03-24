@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DeviceTypesService } from '../deviceTypes.service';
 import { MessageService, SelectItem } from 'primeng/api';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
-import { CategoriesService } from '../../categories/categories.service';
+import { LookupService } from 'src/app/lookup/lookup.service';
 
 @Component({
   selector: 'app-DeviceTypes-form',
@@ -19,6 +19,7 @@ export class DeviceTypesFormComponent extends BaseFormComponent implements OnIni
 
   constructor(
     protected apiService: DeviceTypesService,
+    protected lookupService: LookupService,
     protected messageService: MessageService,
     protected formBuilder: FormBuilder
   ) {
@@ -32,14 +33,16 @@ export class DeviceTypesFormComponent extends BaseFormComponent implements OnIni
   ngOnInit() {
     super.ngOnInit();
     //get categories for dropdown
-    this.dropDownCategories = this.additionalData[0];
+    this.lookupService.getCategoriesLookup().subscribe(result => {
+      this.dropDownCategories = result
+    });
   }
 
   buildForm<DeviceType>(data: DeviceType): FormGroup {
     return this.formBuilder.group({
       name: [data != null ? this.dataToEdit.name : '', [Validators.required, Validators.maxLength(32)]],
       description: [data != null ? this.dataToEdit.description : '', [Validators.maxLength(64)]],
-      categoryId: [data != null ? this.dataToEdit.category.id : null, [Validators.required]],
+      categoryId: [data != null ? this.dataToEdit.categoryId : null, [Validators.required]],
       logo: null
     });
   }

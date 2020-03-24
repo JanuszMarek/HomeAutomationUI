@@ -4,6 +4,7 @@ import { DevicesService } from '../devices.service';
 import { MessageService, SelectItem } from 'primeng/api';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { Device } from 'src/app/shared/model/device';
+import { LookupService } from 'src/app/lookup/lookup.service';
 
 @Component({
   selector: 'app-Devices-form',
@@ -19,6 +20,7 @@ export class DevicesFormComponent extends BaseFormComponent implements OnInit {
 
   constructor(
     protected apiService: DevicesService,
+    protected lookupService: LookupService,
     protected messageService: MessageService,
     protected formBuilder: FormBuilder,
   ) {
@@ -32,8 +34,15 @@ export class DevicesFormComponent extends BaseFormComponent implements OnInit {
   ngOnInit() {
     super.ngOnInit();
     
-    this.dropDownProducers = this.additionalData[0];
-    this.dropDownDeviceTypes = this.additionalData[1];
+    //get producers for multiselect
+    this.lookupService.getProducersLookup().subscribe(result => {
+      this.dropDownProducers = result
+    });
+
+    //get deviceTypes for multiselect
+    this.lookupService.getDeviceTypesLookup().subscribe(result => {
+      this.dropDownDeviceTypes = result
+    });
   }
 
   buildForm<Device>(data: Device): FormGroup {
@@ -41,8 +50,8 @@ export class DevicesFormComponent extends BaseFormComponent implements OnInit {
       name: [data ? this.dataToEdit.name : '', [Validators.required, Validators.maxLength(32)]],
       description: [data ? this.dataToEdit.description : '', [Validators.maxLength(64)]],
       logo: null,
-      producerId: [data ? this.dataToEdit.producer.name : null, [Validators.required]],
-      deviceTypeId: [data ? this.dataToEdit.deviceType.name : null, [Validators.required]],
+      producerId: [data ? this.dataToEdit.producerId : null, [Validators.required]],
+      deviceTypeId: [data ? this.dataToEdit.deviceTypeId : null, [Validators.required]],
       images: null
     });
   }

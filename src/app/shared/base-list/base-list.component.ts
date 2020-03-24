@@ -12,6 +12,9 @@ import { Column } from '../model/column';
   styleUrls: ['./base-list.component.css']
 })
 export class BaseListComponent extends BaseComponent implements OnInit {
+  categoriesOptions: SelectItem[] = [];
+  producersOptions: SelectItem[] = [];
+  deviceTypesOptions: SelectItem[] = [];
 
   constructor(
     protected apiService: ApiBaseService,
@@ -29,7 +32,6 @@ export class BaseListComponent extends BaseComponent implements OnInit {
   protected formDataComponentRef: ComponentRef<any>;
   protected formComponent;
   protected columns : Column[] = [];
-  protected additionalData: SelectItem[][] = [];
   public isLoading = false;
 
   ngOnInit() {
@@ -122,10 +124,6 @@ export class BaseListComponent extends BaseComponent implements OnInit {
     }
   }
 
-  protected assignAdditionalData(): SelectItem[][] {
-    return [];
-  };
-
   private createModalComponent(formComponent: any, data?: BaseModel): void
   {
     this.formDataComponentRef = this.createComponent(formComponent);
@@ -138,7 +136,6 @@ export class BaseListComponent extends BaseComponent implements OnInit {
       this.formDataComponentRef.instance.setDataToCreate();
     }
     this.formDataComponentRef.instance.modalVisible = true;
-    this.formDataComponentRef.instance.additionalData = this.assignAdditionalData();
     this.formDataComponentRef.instance.dataSaved.subscribe(val => 
       {
         if(val)
