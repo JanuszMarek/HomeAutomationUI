@@ -33,6 +33,15 @@ export class BaseListComponent extends BaseComponent implements OnInit {
   protected formComponent;
   protected columns : Column[] = [];
   public isLoading = false;
+  storageUrl = "https://hamstorageaccount.blob.core.windows.net/";
+
+  getImageUrl(model: BaseModel) {
+    if(model.imageUrl)
+    {
+      return this.storageUrl + model.imageUrl;
+    }
+    return null;
+  }
 
   get tableWidthClass() {
     if (this.columns.length < 3) {

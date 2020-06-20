@@ -32,9 +32,7 @@
             <tr>
                 <td *ngFor="let col of columns" [ngSwitch]="col.field">
                     <div *ngSwitchCase="'logo'">
-                        <span *ngIf="data.logo">
-                            <img class="logo" src="{{data.logo.file.data}}"/>
-                        </span>
+                        <img class="logo" src="{{getImageUrl(data)}}"/>
                     </div>
                     <div *ngSwitchCase="'category'">
                         {{data.category.name}}
