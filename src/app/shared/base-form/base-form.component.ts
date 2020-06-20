@@ -22,6 +22,7 @@ export class BaseFormComponent extends BaseComponent implements OnInit {
   uploadedLogo: Logo;
   modelName: string;
   submitBtnDisable: boolean = false; 
+  imageUploadUrl = "Api/Image/upload";
 
   dropDownCategories: SelectItem[] = [];
   dropDownProducers: SelectItem[] = [];

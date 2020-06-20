@@ -13,7 +13,14 @@
         <img src="{{getLogoSrc()}}" class="logo" />
       </div>
       <div *ngIf="logoEditMode">
-        <p-fileUpload #fileUploader name="logo[]" accept="image/*" customUpload="true" (uploadHandler)="customUploader()" [showUploadButton]="false" [showCancelButton]="false" [auto]="true"></p-fileUpload>
+        <p-fileUpload 
+          #fileUploader 
+          name="imageFile" 
+          accept="image/*" 
+          [url]="imageUploadUrl"
+          [showUploadButton]="false" 
+          [showCancelButton]="false" 
+          [auto]="true"></p-fileUpload>
       </div>
       <div class="logo ui-g-2">
         <button type="button" pButton label="{{logoBtnLabel}}" (click)="switchLogoForm()"></button>
