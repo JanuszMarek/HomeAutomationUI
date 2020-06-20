@@ -49,7 +49,7 @@ export class DevicesFormComponent extends BaseFormComponent implements OnInit {
     return this.formBuilder.group({
       name: [data ? this.dataToEdit.name : '', [Validators.required, Validators.maxLength(32)]],
       description: [data ? this.dataToEdit.description : '', [Validators.maxLength(64)]],
-      logo: null,
+      imageId: [data ? this.dataToEdit.imageId : null],
       producerId: [data ? this.dataToEdit.producerId : null, [Validators.required]],
       deviceTypeId: [data ? this.dataToEdit.deviceTypeId : null, [Validators.required]],
       images: null,

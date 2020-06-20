@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Logo } from '../model/logo';
 import { ApiBaseService } from 'src/app/api-base.service';
 import { BaseModel } from '../model/base';
+import { HttpEvent } from '@angular/common/http';
 
 @Component({
   selector: 'app-base-form',
@@ -23,9 +24,11 @@ export class BaseFormComponent extends BaseComponent implements OnInit {
   modelName: string;
   submitBtnDisable: boolean = false; 
   imageUploadUrl = "Api/Image/upload";
+  storageUrl = "https://hamstorageaccount.blob.core.windows.net/";
 
   dropDownCategories: SelectItem[] = [];
   dropDownProducers: SelectItem[] = [];
+  dropDownDeviceTypes: SelectItem[] = [];
 
   dataToEdit: BaseModel;
   @Input() set modalVisible(value: boolean) {
@@ -68,10 +71,11 @@ export class BaseFormComponent extends BaseComponent implements OnInit {
   }
 
   protected getLogoSrc(): string {
-    // if (this.dataToEdit != null && this.dataToEdit.logo != null && this.dataToEdit.logo.file != null)
-    //   return this.dataToEdit.logo.file.data;
-    // else
-      return null;
+    if (this.dataToEdit && this.dataToEdit.imageUrl) {
+      console.log(this.storageUrl + this.dataToEdit.imageUrl);
+      return this.storageUrl + this.dataToEdit.imageUrl;
+    }
+    return null;
   }
 
   protected setDataIfNotNull(data: any) {
@@ -101,18 +105,8 @@ export class BaseFormComponent extends BaseComponent implements OnInit {
     this.setHeaderDataAndForm(this.modelName);
   }
 
-  protected switchLogoForm()
-  {
-    if(this.logoEditMode)
-    {
-      this.logoEditMode = !this.logoEditMode;
-      this.logoBtnLabel = "Upload";
-    }
-    else
-    {
-      this.logoEditMode = !this.logoEditMode;
-      this.logoBtnLabel = "Cancel";
-    }
+  protected switchLogoForm() {
+    this.logoEditMode = !this.logoEditMode;
   }
 
   protected closeModal(bool): void {
@@ -121,20 +115,12 @@ export class BaseFormComponent extends BaseComponent implements OnInit {
     this.dataSaved.emit(bool);
   }
 
-  protected customUploader() {
-    var logo: Logo;
-    logo = {
-      file: {
-        data: ''
-      },
-      name: this.fileUploader.files[0].name
-    }
-    const reader = new FileReader();
-    reader.readAsDataURL(this.fileUploader.files[0]);
-    reader.onloadend = function() {
-      logo.file.data = reader.result.toString();
-    }
-    this.uploadedLogo = logo; 
+  onUpload(event) {
+    var result = event.originalEvent.body.result;
+    this.dataForm.controls['imageId'].setValue(result.imageId);
+    this.dataToEdit.imageUrl = result.imageUrl;
+
+    this.switchLogoForm();
   }
 
   protected createNew() {

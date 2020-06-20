@@ -33,7 +33,7 @@ export class ProducersFormComponent extends BaseFormComponent implements OnInit 
     return this.formBuilder.group({
       name: [data ? this.dataToEdit.name : '', [Validators.required, Validators.maxLength(32)]],
       description: [data ? this.dataToEdit.description : '', [Validators.maxLength(64)]],
-      logo: null,
+      imageId: [data ? this.dataToEdit.imageId : null],
       rowVersion: [data ? this.dataToEdit.rowVersion : null]
     });
   }

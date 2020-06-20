@@ -4,7 +4,8 @@ export interface BaseModel {
     id?: number;
     name?: string;
     description?: string;
-    // logo: Logo;
+    imageUrl?: string;
+    imageId?: number;
 
     rowVersion?: string;
     createDate?: Date;

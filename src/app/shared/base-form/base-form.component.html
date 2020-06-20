@@ -20,10 +20,11 @@
           [url]="imageUploadUrl"
           [showUploadButton]="false" 
           [showCancelButton]="false" 
-          [auto]="true"></p-fileUpload>
+          [auto]="true"
+          (onUpload)="onUpload($event)"></p-fileUpload>
       </div>
       <div class="logo ui-g-2">
-        <button type="button" pButton label="{{logoBtnLabel}}" (click)="switchLogoForm()"></button>
+        <button type="button" pButton [label]="logoEditMode ? 'Cancel' : 'Upload'" (click)="switchLogoForm()"></button>
       </div>
     </div>
     
